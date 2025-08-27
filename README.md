@@ -5,8 +5,8 @@
 `drafting` exists in the official typst package repository, so the
 recommended approach is to import it from the `preview` namespace:
 
-``` typst
-#import "@preview/drafting:0.2.2"
+```typst
+#import "@preview/drafting:0.2.2": *
 ```
 
 Margin notes cannot lay themselves out correctly until they know your
@@ -14,7 +14,7 @@ page size and margins. By default, they occupy nearly the entirety of
 the left or right margin, but you can provide explicit left/right bounds
 if desired:
 
-``` typ
+```typ
 // Example:
 // Default margin in typst is 2.5cm, but we want to use 2cm
 // On the left
@@ -23,7 +23,7 @@ if desired:
 
 ## The basics
 
-``` typst
+```typst
 #lorem(20)
 #margin-note(side: left)[Hello, world!]
 #lorem(10)
@@ -42,6 +42,7 @@ if desired:
   You can manually adjust the position of notes with `dy` to silence the warning.
 ]
 ```
+
 ![Example 1](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-1.png)
 
 ## Adjusting the default style
@@ -49,18 +50,19 @@ if desired:
 All function defaults are customizable through updating the module
 state:
 
-``` typst
+```typst
 #lorem(14) #margin-note[Default style]
 #lorem(10)
 #set-margin-note-defaults(stroke: orange, side: left)
 #margin-note[Updated style]
 #lorem(10)
 ```
+
 ![Example 2](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-2.png)
 
 Even deeper customization is possible by overriding the default `rect`:
 
-``` typst
+```typst
 #import "@preview/colorful-boxes:1.1.0": stickybox
 
 #let default-rect(stroke: none, fill: none, width: 0pt, content) = {
@@ -77,11 +79,12 @@ Even deeper customization is possible by overriding the default `rect`:
 // Undo changes from this example
 #set-margin-note-defaults(rect: rect, stroke: red)
 ```
+
 ![Example 3](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-3.png)
 
 ## Multiple document reviewers
 
-``` typst
+```typst
 #let reviewer-a = margin-note.with(stroke: blue)
 #let reviewer-b = margin-note.with(stroke: purple)
 #lorem(10)
@@ -90,11 +93,12 @@ Even deeper customization is possible by overriding the default `rect`:
 #reviewer-b(side: left)[Reviewer B comment]
 #lorem(10)
 ```
+
 ![Example 4](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-4.png)
 
 ## Inline Notes
 
-``` typst
+```typst
 #lorem(10)
 #inline-note[The default inline note will split the paragraph at its location]
 #lorem(10)
@@ -103,11 +107,12 @@ Even deeper customization is possible by overriding the default `rect`:
 ]
 #lorem(10)
 ```
+
 ![Example 5](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-5.png)
 
 ## Hiding notes for print preview
 
-``` typst
+```typst
 #set-margin-note-defaults(hidden: true)
 
 #lorem(20)
@@ -116,13 +121,15 @@ Even deeper customization is possible by overriding the default `rect`:
 // Undo these changes
 #set-margin-note-defaults(hidden: false)
 ```
+
 ![Example 6](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-6.png)
 
 # Outline of all notes
 
-``` typst
+```typst
 #note-outline()
 ```
+
 ![Example 7](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-7.png)
 
 # Positioning
@@ -132,7 +139,7 @@ Even deeper customization is possible by overriding the default `rect`:
 Need to measure space for fine-tuned positioning? You can use
 `rule-grid` to cross-hatch the page with rule lines:
 
-``` typst
+```typst
 #rule-grid(width: 10cm, height: 3cm, spacing: 20pt)
 #place(
   dx: 180pt,
@@ -147,6 +154,7 @@ Need to measure space for fine-tuned positioning? You can use
 // The rule grid doesn't take up space, so add it explicitly
 #v(3cm + 1em)
 ```
+
 ![Example 8](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-8.png)
 
 ## Absolute positioning
@@ -155,7 +163,7 @@ What about absolutely positioning something regardless of margin and
 relative location? `absolute-place` is your friend. You can put content
 anywhere:
 
-``` typst
+```typst
 #context {
   let (dx, dy) = (here().position().x, here().position().y)
   let content-str = (
@@ -175,6 +183,7 @@ anywhere:
 }
 #v(0.5in)
 ```
+
 ![Example 9](https://www.github.com/ntjess/typst-drafting/raw/v0.2.2/assets/example-9.png)
 
 The “rule-grid” also supports absolute placement at the top-left of the

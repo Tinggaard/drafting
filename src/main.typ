@@ -63,6 +63,14 @@
   }
 }
 
+#let help(..args) = {
+  import "@preview/tidy:0.4.3"
+  let namespace = (
+    ".": read.with("/src/my-package.typ")
+  )
+  tidy.generate-help(namespace: namespace, package-name: "tidy")(..args)
+}
+
 #let _calc-text-resize-ratio(width, spacing) = {
   // Add extra margin to ensure reasonable separation between two adjacent lines
   let size = measure(text[#width]).width * 120%
