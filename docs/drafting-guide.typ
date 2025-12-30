@@ -17,7 +17,7 @@
   ],
   date: datetime.today().display("[month repr:long] [day], [year]"),
   version: version,
-  url: "https://github.com/ntjess/typest-drafting"
+  url: "https://github.com/ntjess/typst-drafting"
 )
 
 = Functions
